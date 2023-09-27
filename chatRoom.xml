@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<chatRooms>
+    <chatRoom>
+        <id>1</id>
+        <name>Sala1</name>
+    </chatRoom>
+    <chatRoom>
+        <id>2</id>
+        <name>Sala2</name>
+    </chatRoom>
+    <chatRoom>
+        <id>3</id>
+        <name>Sala3</name>
+    </chatRoom>
+</chatRooms>
+
