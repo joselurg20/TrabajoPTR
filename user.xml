@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <user>
+        <nickname>Alice</nickname>
+    </user>
+    <user>
+        <nickname>Bob</nickname>
+    </user>
+    <user>
+        <nickname>Charlie</nickname>
+    </user>
+    <user>
+        <nickname>David</nickname>
+    </user>
+    <user>
+        <nickname>Eve</nickname>
+    </user>
+    <user>
+        <nickname>Frank</nickname>
+    </user>
+</users>
