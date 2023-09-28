@@ -12,5 +12,9 @@
         <id>3</id>
         <name>Sala3</name>
     </chatRoom>
+    <chatRoom>
+        <id>4</id>
+        <name>Sala4</name>
+    </chatRoom>
 </chatRooms>
 
