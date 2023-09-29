@@ -1,4 +1,4 @@
-package com.example.trabajoacd;
+package com.example.trabajoacd.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class HomePageControllador {
+public class HomePageController {
 
     @FXML
     private Button button1;
