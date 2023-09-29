@@ -1,4 +1,4 @@
-package com.example.trabajoacd;
+package com.example.trabajoacd.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 
 import java.io.File;
 
-public class HomePageControllador {
+public class HomePageController {
 
     @FXML
     private ListView<String> listView;

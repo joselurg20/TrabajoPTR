@@ -1,11 +1,12 @@
-package com.example.trabajoacd;
+package com.example.trabajoacd.controller;
 
+import com.example.trabajoacd.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import model.User;
-import model.Users;
+import com.example.trabajoacd.model.domain.User;
+import com.example.trabajoacd.model.domain.Users;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
