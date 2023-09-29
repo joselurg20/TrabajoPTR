@@ -1,6 +1,7 @@
 package com.example.trabajoacd;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -9,9 +10,24 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 
 public class HomePageControllador {
+
+    @FXML
+    private Button button1;
+
+    @FXML
+    private ComboBox<?> cmBox;
+
+
+    @FXML
+    void add(ActionEvent event) throws IOException {
+        App.setRoot("CreateRoom");
+    }
 
     @FXML
     private ListView<String> listView;
