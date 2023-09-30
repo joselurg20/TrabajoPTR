@@ -8,7 +8,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trabajoacd.controller.HomePageController">
    <children>
       <ComboBox fx:id="cmBox" layoutX="419.0" layoutY="27.0" prefWidth="150.0" />
-      <ListView fx:id="listView" layoutX="36.0" layoutY="52.0" prefHeight="147.0" prefWidth="200.0" />
-      <Button fx:id="button1" layoutX="509.0" layoutY="320.0" mnemonicParsing="false" onAction="#addChat" prefHeight="38.0" prefWidth="60.0" text="+" />
+      <ListView fx:id="listView" layoutX="369.0" layoutY="69.0" prefHeight="235.0" prefWidth="200.0" />
+      <Button fx:id="button1" layoutX="369.0" layoutY="316.0" mnemonicParsing="false" onAction="#addChat" prefHeight="11.0" prefWidth="81.0" text="+" />
+      <Button fx:id="btn_room" layoutX="488.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleRoomSelection" prefHeight="25.0" prefWidth="81.0" text="Go to Room" />
    </children>
 </AnchorPane>
