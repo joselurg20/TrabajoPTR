@@ -8,8 +8,6 @@ import java.util.List;
 public class ChatRoom {
     private int id;
     private String name;
-    // Resto del código...
-
     @XmlElement(name = "id")
     public int getId() {
         return id;
@@ -27,8 +25,6 @@ public class ChatRoom {
     public void setName(String name) {
         this.name = name;
     }
-
-
         private List<User> users = new ArrayList<>();
         private List<Message> messages = new ArrayList<>();
 
