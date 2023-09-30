@@ -1,5 +1,6 @@
 package com.example.trabajoacd.controller;
 
+import com.example.trabajoacd.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -14,8 +15,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.control.Button;
 
 public class HomePageController {
+
 
     @FXML
     private Button button1;
@@ -24,10 +27,7 @@ public class HomePageController {
     private ComboBox<?> cmBox;
 
 
-    @FXML
-    void add(ActionEvent event) throws IOException {
-        App.setRoot("CreateRoom");
-    }
+
 
     @FXML
     private ListView<String> listView;
@@ -61,4 +61,7 @@ public class HomePageController {
     }
 
 
+    public void addChat(javafx.event.ActionEvent event) throws IOException {
+        App.setRoot("CreateRoom");
+    }
 }
