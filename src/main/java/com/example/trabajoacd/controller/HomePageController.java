@@ -1,6 +1,7 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,9 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,8 +21,10 @@ public class HomePageController {
     private Button button1;
     @FXML
     private ComboBox<?> cmBox;
+
     @FXML
     private Button btn_room;
+
     @FXML
     private ListView<String> listView;
 
@@ -89,6 +89,12 @@ public class HomePageController {
         }
     }
 
+
+    @FXML
+    void addChat(ActionEvent event) throws IOException{
+        App.setRoot("CreateRoom");
+
     public void addChat(javafx.event.ActionEvent event) {
+ main
     }
 }
