@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<chatRoom>
-    <id>127</id>
-    <name>sala8</name>
-</chatRoom>
+<chatRooms>
+    <chatRoom>
+        <id>1</id>
+        <name>Sala1</name>
+    </chatRoom>
+    <chatRoom>
+        <id>2</id>
+        <name>Sala2</name>
+    </chatRoom>
+    <chatRoom>
+        <id>1234</id>
+        <name>sala6</name>
+    </chatRoom>
+</chatRooms>
