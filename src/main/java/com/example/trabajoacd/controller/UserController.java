@@ -1,12 +1,13 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
+import com.example.trabajoacd.model.domain.User;
+
+import com.example.trabajoacd.model.domain.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import com.example.trabajoacd.model.domain.User;
-import com.example.trabajoacd.model.domain.Users;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -26,17 +27,16 @@ public class UserController {
 
     @FXML
     void pass(ActionEvent event) throws IOException {
-        String nickname= usernameField.getText();
-        // Verificar si el usuario existe en el archivo XML de usuarios
-        if (userExistsInXML(nickname)) {
-            // Permitir que el usuario entre
-            System.out.println("Bienvenido, " + nickname + "!");
-            App.setRoot("HomePage");
-        } else {
-            // Mensaje de error
-            System.out.println("El usuario " + nickname + " no existe en el sistema. No puede entrar.");
-        }
+        String nickname = usernameField.getText();
+
+        User currentUser = new User(nickname);
+
+        UserManager.addUser(currentUser);
+
+        System.out.println("Bienvenido, " + nickname + "!");
+        App.setRoot("HomePage");
     }
+
     private boolean userExistsInXML(String nickname) {
         List<User> users = loadUsersFromXML();
         for (User user : users) {

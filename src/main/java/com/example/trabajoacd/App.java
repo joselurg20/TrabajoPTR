@@ -1,4 +1,5 @@
 package com.example.trabajoacd;
+import com.example.trabajoacd.model.threads.UpdateUsersThread;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,12 +14,17 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    @Override
-        public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("HomePage"), 700, 500);
+    public void start(Stage stage) throws IOException {
+        // Crear e iniciar el hilo para actualizar usuarios conectados
+        UpdateUsersThread updateThread = new UpdateUsersThread();
+        updateThread.start();
+
+        // Cargar la escena
+        scene = new Scene(loadFXML("User"), 700, 500);
         stage.setScene(scene);
         stage.show();
-        }
+    }
+
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();

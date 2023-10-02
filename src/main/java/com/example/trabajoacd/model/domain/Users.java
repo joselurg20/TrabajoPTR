@@ -1,15 +1,18 @@
 package com.example.trabajoacd.model.domain;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "users")
+@XmlRootElement
 public class Users {
-
     private List<User> users;
 
-    @XmlElement(name = "user")
+    public Users() {}
+
+    public Users(List<User> users) {
+        this.users = users;
+    }
+
     public List<User> getUsers() {
         return users;
     }
@@ -18,4 +21,5 @@ public class Users {
         this.users = users;
     }
 }
+
 

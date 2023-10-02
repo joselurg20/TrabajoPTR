@@ -1,12 +1,18 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
+import com.example.trabajoacd.model.domain.User;
+import com.example.trabajoacd.model.domain.Users;
+import com.example.trabajoacd.model.threads.UpdateUsersThread;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode; // Importa esta clase
+import javafx.scene.control.SelectionMode;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,12 +21,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class HomePageController {
+
     @FXML
     private Button button1;
+
     @FXML
-    private ComboBox<?> cmBox;
+    private ComboBox<String> connectedUsersComboBox;
 
     @FXML
     private Button btn_room;
@@ -30,46 +42,33 @@ public class HomePageController {
 
     @FXML
     private void initialize() {
-        // Ruta al archivo XML que deseas leer
-        String filePath = "chatRoom.xml";
+        String chatRoomFilePath = "chatRoom.xml";
+        cargarSalasDesdeXml(chatRoomFilePath);
 
         try {
-            // Crear un analizador DOM
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(new File(filePath));
+            UpdateUsersThread updateThread = new UpdateUsersThread();
+            updateThread.start();
 
-            // Obtener la lista de elementos "room"
-            NodeList roomNodes = doc.getElementsByTagName("name");
+            ObservableList<String> connectedUsers = FXCollections.observableArrayList();
+            connectedUsersComboBox.setItems(connectedUsers);
 
-            // Agregar las salas a la lista
-            for (int i = 0; i < roomNodes.getLength(); i++) {
-                Element roomElement = (Element) roomNodes.item(i);
-                String roomName = roomElement.getTextContent();
-                listView.getItems().add(roomName);
-            }
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.scheduleAtFixedRate(() -> {
+                Platform.runLater(() -> {
+                    connectedUsers.clear();
+                    connectedUsers.addAll(UserManager.getConnectedUsersNames());
+                });
+            }, 0, 5, TimeUnit.SECONDS);
 
-            // Configurar el modo de selección de ListView
-            listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            Users loadedUsers = XmlManager.loadConnectedUsersFromXml();
+            List<User> userList = loadedUsers.getUsers();
+            UserManager.setConnectedUsers(userList);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-/*
-    @FXML
-    private void handleRoomSelection(ActionEvent event) {
-        // Verifica si se ha seleccionado una sala en el ListView
-        String selectedRoom = listView.getSelectionModel().getSelectedItem();
-        if (selectedRoom != null) {
-            // Si hay una sala seleccionada, navega a la página "chatRooms.fxml"
-            navigateToChatRoom();
-        } else {
-            // Si no hay una sala seleccionada, muestra un mensaje o realiza alguna acción
-            System.out.println("Por favor, selecciona una sala antes de continuar.");
-        }
-    }
-*/
+
     private void navigateToChatRoom() {
         try {
             App.setRoot("ChatRoom");
@@ -77,24 +76,44 @@ public class HomePageController {
             e.printStackTrace();
         }
     }
+
     public void handleRoomSelection(javafx.event.ActionEvent event) {
-        // Verifica si se ha seleccionado una sala en el ListView
         String selectedRoom = listView.getSelectionModel().getSelectedItem();
         if (selectedRoom != null) {
-            // Si hay una sala seleccionada, navega a la página "chatRooms.fxml"
             navigateToChatRoom();
         } else {
-            // Si no hay una sala seleccionada, muestra un mensaje o realiza alguna acción
             System.out.println("Por favor, selecciona una sala antes de continuar.");
         }
     }
 
-
     @FXML
-    void addChat(ActionEvent event) throws IOException{
+    void addChat(ActionEvent event) throws IOException {
         App.setRoot("CreateRoom");
+    }
+    @FXML
+    void login(ActionEvent event) throws IOException {
+        App.setRoot("User");
+    }
 
-    public void addChat(javafx.event.ActionEvent event) {
- main
+    private void cargarSalasDesdeXml(String filePath) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(new File(filePath));
+
+            NodeList roomNodes = doc.getElementsByTagName("name");
+
+            for (int i = 0; i < roomNodes.getLength(); i++) {
+                Element roomElement = (Element) roomNodes.item(i);
+                String roomName = roomElement.getTextContent();
+                listView.getItems().add(roomName);
+            }
+
+            listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
