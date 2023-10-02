@@ -20,7 +20,7 @@ public class App extends Application {
         updateThread.start();
 
         // Cargar la escena
-        scene = new Scene(loadFXML("User"), 700, 500);
+        scene = new Scene(loadFXML("User"), 800, 600);
         stage.setScene(scene);
         stage.show();
     }

@@ -1,8 +1,6 @@
 
 y
 Isrc/main/java/com/example/trabajoacd/controller/CreateRoomController.java,8\1\818409998ef7e6a4c043bca022d55aed91a0f81f
-]
--src/main/java/com/example/trabajoacd/App.java,f\d\fd23efa85524443452220a35f3c53f49d6fa9146
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 ]
