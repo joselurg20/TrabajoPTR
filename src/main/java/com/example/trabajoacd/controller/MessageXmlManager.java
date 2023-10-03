@@ -22,18 +22,18 @@ public class MessageXmlManager {
         }
     }
 
-    public static ChatRoom loadMessagesFromXml() {
+    public static Message loadMessagesFromXml() {
         try {
             JAXBContext context = JAXBContext.newInstance(Message.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             File file = new File(XML_FILE_PATH);
             if (file.exists()) {
-                return (ChatRoom) unmarshaller.unmarshal(file);
+                return (Message) unmarshaller.unmarshal(file);
             }
-            return new ChatRoom();
+            return new Message();
         } catch (JAXBException e) {
             e.printStackTrace();
-            return new ChatRoom();
+            return new Message();
         }
     }
 }
