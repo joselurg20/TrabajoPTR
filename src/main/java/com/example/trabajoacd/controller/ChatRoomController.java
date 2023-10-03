@@ -33,8 +33,12 @@ public class ChatRoomController {
 
 
     public void initialize() {
+        // Cargar mensajes anteriores desde el XML
+        updateChat();
+
         chatListView.setItems(chatMessages);
     }
+
 
     @FXML
     void backToRoom(ActionEvent event) throws IOException {
@@ -52,7 +56,7 @@ public class ChatRoomController {
 
     private void sendMessage(String senderNickname, String messageContent) {
         try {
-            dao.saveMessage(senderNickname + ": " + messageContent, "message.xml");
+            dao.saveMessage(senderNickname + ": " + messageContent);
 
             // Agregar el mensaje al ListView
             String formattedMessage = senderNickname + ": " + messageContent;
@@ -64,6 +68,7 @@ public class ChatRoomController {
         }
     }
 
+
     public void updateChat() {
         String messagesAsString = dao.loadMessagesAsString();
         String[] messageArray = messagesAsString.split("\n");
@@ -74,4 +79,5 @@ public class ChatRoomController {
         // Añadimos los mensajes a la lista
         chatMessages.addAll(Arrays.asList(messageArray));
     }
+
 }

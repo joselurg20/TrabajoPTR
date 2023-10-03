@@ -3,12 +3,15 @@ package com.example.trabajoacd.model.domain;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement(name = "message")
 public class Message {
     private String sender;
     private Date timestamp;
     private String content;
+    private List<String> messages = new ArrayList<>(); // Lista de mensajes
 
     public Message() {}
 
@@ -16,9 +19,6 @@ public class Message {
         this.sender = sender;
         this.content = content;
         this.timestamp = new Date();
-    }
-
-    public Message(String messageContent) {
     }
 
     @XmlElement
@@ -48,10 +48,18 @@ public class Message {
         this.content = content;
     }
 
+    @XmlElement(name = "message")
+    public List<String> getMessages() {
+        return messages;
+    }
+
+    public void addMessage(String messageContent) {
+        messages.add(messageContent);
+    }
+
     @Override
     public String toString() {
         return timestamp + " " + sender + ": " + content;
     }
 }
-
 

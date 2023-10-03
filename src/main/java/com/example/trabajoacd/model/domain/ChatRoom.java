@@ -10,7 +10,7 @@ public class ChatRoom {
     private int id;
     private String name;
     private List<User> users = new ArrayList<>();
-    private List<String> messages = new ArrayList<String>();
+    private List<String> messages = new ArrayList<>();
 
     public static List<Message> getMessage() {
         return new ArrayList<>(); // Inicializa la lista de mensajes
