@@ -18,6 +18,9 @@ public class Message {
         this.timestamp = new Date();
     }
 
+    public Message(String messageContent) {
+    }
+
     @XmlElement
     public String getSender() {
         return sender;
@@ -44,5 +47,11 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return timestamp + " " + sender + ": " + content;
+    }
 }
+
 

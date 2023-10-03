@@ -1,0 +1,11 @@
+
+x
+java:S20957"VUse try-with-resources or close this "ScheduledExecutorService" in a "finally" clause.(ˆÁŽôÿÿÿÿÿ8ÿˆþù®1
+P
+java:S2755d"3Disable access to external entities in XML parsing.(²µŸš8€‰þù®1
+o	java:S116&"SRename this field "btn_room" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÎ¡Ž8‚‰þù®1
+H
+java:S16028",Remove useless curly braces around statement(ž›¨8‹‰þù®1
+N
+java:S1172P",Remove this unused method parameter "event".(Ãü©ôüÿÿÿÿ8“‰þù®1
+Z	java:S106U"9Replace this use of System.out or System.err by a logger.(›Æ­Òÿÿÿÿÿ8•‰þù®1
