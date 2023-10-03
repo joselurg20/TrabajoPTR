@@ -2,6 +2,7 @@ package com.example.trabajoacd.model.DAO;
 
 import com.example.trabajoacd.model.domain.ChatRoom;
 import com.example.trabajoacd.controller.MessageXmlManager;
+import com.example.trabajoacd.model.domain.Message;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class ChatsDAO {
     public void saveMessage(String messageContent, String s) {
         ChatRoom chatRoom = MessageXmlManager.loadMessagesFromXml();
         chatRoom.addMessage(messageContent);
-        MessageXmlManager.saveMessagesToXml(chatRoom);
+        MessageXmlManager.saveMessagesToXml(new Message());
     }
 
     public String loadMessagesAsString() {
@@ -23,4 +24,3 @@ public class ChatsDAO {
         return messages.toString();
     }
 }
-
