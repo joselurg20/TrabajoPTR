@@ -2,6 +2,7 @@ package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
 import com.example.trabajoacd.model.DAO.ChatsDAO;
+import com.example.trabajoacd.model.domain.Session;
 import com.example.trabajoacd.model.domain.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,9 +24,6 @@ public class ChatRoomController {
 
     @FXML
     private TextField messageField;
-
-    private User currentUser;
-
     @FXML
     private Button btn;
 
@@ -33,9 +31,6 @@ public class ChatRoomController {
 
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
 
-    public void setCurrentUser(User user) {
-        this.currentUser = user;
-    }
 
     public void initialize() {
         chatListView.setItems(chatMessages);
@@ -49,8 +44,8 @@ public class ChatRoomController {
     @FXML
     void sendMessage(ActionEvent event) {
         String messageContent = messageField.getText();
-        if (!messageContent.isEmpty() && currentUser != null) {
-            String senderNickname = currentUser.getNickname();
+        if (!messageContent.isEmpty() && Session.currentUser != null) {
+            String senderNickname = Session.currentUser.getNickname();
             sendMessage(senderNickname, messageContent);
         }
     }

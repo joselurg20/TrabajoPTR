@@ -1,6 +1,7 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
+import com.example.trabajoacd.model.domain.Session;
 import com.example.trabajoacd.model.domain.User;
 
 import com.example.trabajoacd.model.domain.Users;
@@ -29,9 +30,9 @@ public class UserController {
     void pass(ActionEvent event) throws IOException {
         String nickname = usernameField.getText();
 
-        User currentUser = new User(nickname);
+        Session.currentUser = new User(nickname);
 
-        UserManager.addUser(currentUser);
+        UserManager.addUser(Session.currentUser);
 
         System.out.println("Bienvenido, " + nickname + "!");
         App.setRoot("HomePage");
