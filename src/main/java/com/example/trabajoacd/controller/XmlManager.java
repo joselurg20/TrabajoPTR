@@ -1,10 +1,8 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.model.domain.Users;
-
 import javax.xml.bind.*;
 import java.io.File;
-import java.io.IOException;
 
 public class XmlManager {
 
@@ -26,12 +24,10 @@ public class XmlManager {
         try {
             JAXBContext context = JAXBContext.newInstance(Users.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-
             File file = new File(XML_FILE_PATH);
             if (file.exists()) {
                 return (Users) unmarshaller.unmarshal(file);
             }
-
             return new Users();
         } catch (JAXBException e) {
             e.printStackTrace();
