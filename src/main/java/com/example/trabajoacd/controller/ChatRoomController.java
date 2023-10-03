@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -24,6 +25,9 @@ public class ChatRoomController {
     private TextField messageField;
 
     private User currentUser;
+
+    @FXML
+    private Button btn;
 
     private final ChatsDAO dao = new ChatsDAO();
 
