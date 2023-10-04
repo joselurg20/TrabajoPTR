@@ -11,5 +11,3 @@ n
 >src/main/java/com/example/trabajoacd/model/domain/Session.java,0\b\0be53200f87870ec06bc7f7f1c7cbd5e0bf55fb0
 v
 Fsrc/main/java/com/example/trabajoacd/controller/MessageXmlManager.java,e\b\ebe3ae2b18c0804b49299a269921ba0372876ef1
-8
-user.xml,1\9\19d3de9d668f42cebc924d0cd17e9edb1578db23
