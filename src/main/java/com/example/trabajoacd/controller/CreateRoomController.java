@@ -1,22 +1,18 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
-import com.example.trabajoacd.model.DAO.ChatsDAO;
 import com.example.trabajoacd.model.domain.ChatRoom;
 import com.example.trabajoacd.model.domain.ChatRooms;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-
-import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateRoomController {
 
@@ -28,13 +24,13 @@ public class CreateRoomController {
 
     @FXML
     void saveRoom(ActionEvent event) {
-        int id = Integer.parseInt(idField.getText());
+        int id = Integer.parseInt(UUID.randomUUID().toString());
+
         String name = nameField.getText();
 
         ChatRoom room = new ChatRoom();
         room.setId(id);
         room.setName(name);
-
         // Cargar salas existentes desde el archivo XML
         List<ChatRoom> existingRooms = loadExistingChatRooms("chatRoom.xml");
 
@@ -53,8 +49,6 @@ public class CreateRoomController {
             e.printStackTrace(); // Manejar errores apropiadamente en tu aplicación
         }
     }
-
-
     private List<ChatRoom> loadExistingChatRooms(String filePath) {
         try {
             // Cargar las salas existentes desde el archivo XML
