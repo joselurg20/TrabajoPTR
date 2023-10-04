@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "user")
-
 public class User {
         private  String nickname;
 
@@ -22,6 +21,7 @@ public class User {
         public void setNickname(String nickname) {
             this.nickname = nickname;
         }
+
     }
 
 

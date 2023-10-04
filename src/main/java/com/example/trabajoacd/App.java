@@ -17,7 +17,6 @@ public class App extends Application {
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
-
     @Override
     public void start(Stage stage) throws IOException {
         // Crear e iniciar el hilo para actualizar usuarios conectados
