@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <users>
     <users>
-        <nickname>Alice</nickname>
+        <nickname>David</nickname>
+    </users>
+    <users>
+        <nickname>Bob</nickname>
     </users>
 </users>
