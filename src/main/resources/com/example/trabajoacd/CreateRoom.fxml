@@ -14,7 +14,6 @@
          <font>
             <Font name="System Bold" size="38.0" />   
          </font></Label>
-      <TextField fx:id="idField" layoutX="279.0" layoutY="282.0" prefHeight="30.0" prefWidth="242.0" promptText="ID..." style="-fx-background-color: #c8c8c8;" />
       <TextField fx:id="nameField" layoutX="279.0" layoutY="347.0" prefHeight="30.0" prefWidth="242.0" promptText="Name..." style="-fx-background-color: #c8c8c8;" />
       <Button layoutX="279.0" layoutY="461.0" mnemonicParsing="false" onAction="#saveRoom" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #09705d; -fx-border-radius: 5px;" text="Save" textFill="WHITE" />
       <Button layoutX="421.0" layoutY="461.0" mnemonicParsing="false" onAction="#back" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #09705d;" text="Home" textFill="WHITE" />
@@ -23,5 +22,6 @@
             <Image url="https://cdn.icon-icons.com/icons2/1369/PNG/512/-person-add_89833.png" />
          </image>
       </ImageView>
+      <Label fx:id="labelTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="423.0" prefHeight="17.0" prefWidth="800.0" textOverrun="CENTER_ELLIPSIS"  textFill="#09705d" />
    </children>
 </AnchorPane>

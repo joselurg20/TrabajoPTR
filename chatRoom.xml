@@ -12,4 +12,28 @@
         <id>1234</id>
         <name>sala6</name>
     </chatRoom>
+    <chatRoom>
+        <id>1235</id>
+        <name>hola</name>
+    </chatRoom>
+    <chatRoom>
+        <id>1236</id>
+        <name>marta</name>
+    </chatRoom>
+    <chatRoom>
+        <id>1237</id>
+        <name>enove</name>
+    </chatRoom>
+    <chatRoom>
+        <id>1238</id>
+        <name>palabra</name>
+    </chatRoom>
+    <chatRoom>
+        <id>1239</id>
+        <name>palabdea2</name>
+    </chatRoom>
+    <chatRoom>
+        <id>1240</id>
+        <name>123</name>
+    </chatRoom>
 </chatRooms>

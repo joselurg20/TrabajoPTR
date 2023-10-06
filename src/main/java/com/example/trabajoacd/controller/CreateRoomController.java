@@ -5,32 +5,35 @@ import com.example.trabajoacd.model.domain.ChatRoom;
 import com.example.trabajoacd.model.domain.ChatRooms;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class CreateRoomController {
-
-    @FXML
-    private TextField idField;
 
     @FXML
     private TextField nameField;
 
     @FXML
-    void saveRoom(ActionEvent event) {
-        int id = Integer.parseInt(UUID.randomUUID().toString());
+    private Label labelTxt;
 
+    @FXML
+    void saveRoom(ActionEvent event) {
         String name = nameField.getText();
 
         ChatRoom room = new ChatRoom();
-        room.setId(id);
         room.setName(name);
+
+        // Generar un ID único para la sala
+        int id = generateUniqueID();
+        room.setId(id);
+
         // Cargar salas existentes desde el archivo XML
         List<ChatRoom> existingRooms = loadExistingChatRooms("chatRoom.xml");
 
@@ -39,6 +42,12 @@ public class CreateRoomController {
 
         // Guardar todas las salas, incluida la nueva, en el archivo XML
         saveAllChatRooms(existingRooms, "chatRoom.xml");
+
+        // Mostrar un mensaje en el Label
+        labelTxt.setText("La sala se ha creado correctamente.");
+
+        // Limpiar el campo de nombre después de guardar
+        nameField.clear();
     }
 
     @FXML
@@ -49,6 +58,27 @@ public class CreateRoomController {
             e.printStackTrace(); // Manejar errores apropiadamente en tu aplicación
         }
     }
+
+    private int generateUniqueID() {
+        // Implementa lógica para generar un ID único según tus necesidades
+        // En este ejemplo, puedes simplemente incrementar un contador
+        return getNextAvailableID();
+    }
+
+    private int getNextAvailableID() {
+        // Implementa la lógica para encontrar el siguiente ID disponible
+        // Puedes utilizar un contador, buscar el máximo en la lista actual, etc.
+        // Por ejemplo, puedes recorrer las salas existentes para encontrar el siguiente ID disponible.
+        List<ChatRoom> existingRooms = loadExistingChatRooms("chatRoom.xml");
+        int maxID = 0;
+        for (ChatRoom room : existingRooms) {
+            if (room.getId() > maxID) {
+                maxID = room.getId();
+            }
+        }
+        return maxID + 1; // Devuelve el siguiente ID disponible
+    }
+
     private List<ChatRoom> loadExistingChatRooms(String filePath) {
         try {
             // Cargar las salas existentes desde el archivo XML
@@ -78,5 +108,4 @@ public class CreateRoomController {
             e.printStackTrace();
         }
     }
-
 }
