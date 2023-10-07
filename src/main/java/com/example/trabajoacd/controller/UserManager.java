@@ -2,7 +2,6 @@ package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.model.domain.User;
 import com.example.trabajoacd.model.domain.Users;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,14 @@ public class UserManager {
     public static void addUser(User user) {
         connectedUsers.add(user);
         Users users = new Users(connectedUsers);
+        XmlManager.saveConnectedUsersToXml(users); // Guardar lista cada vez que se agrega un usuario
+    }
+    public static void removeUser(User user) {
+        connectedUsers.remove(user);
+        Users users = new Users(connectedUsers);
         XmlManager.saveConnectedUsersToXml(users);
     }
+
 
     public static List<User> getConnectedUsers() {
         return connectedUsers;
@@ -31,6 +36,7 @@ public class UserManager {
         connectedUsers = users;
     }
 }
+
 
 
 

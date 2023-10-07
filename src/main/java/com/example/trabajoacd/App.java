@@ -1,6 +1,5 @@
 package com.example.trabajoacd;
 
-import com.example.trabajoacd.model.threads.UpdateUsersThread;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,9 +18,6 @@ public class App extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        // Crear e iniciar el hilo para actualizar usuarios conectados
-        UpdateUsersThread updateThread = new UpdateUsersThread();
-        updateThread.start();
 
         // Cargar la escena
         scene = new Scene(loadFXML("User"), 800, 600);

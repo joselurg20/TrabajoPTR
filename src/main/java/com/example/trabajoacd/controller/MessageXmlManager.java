@@ -1,12 +1,10 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.model.domain.Message;
-
 import javax.xml.bind.*;
 import java.io.File;
 
 public class MessageXmlManager {
-
     private static final String XML_FILE_PATH = "messages.xml"; // Cambiado el nombre del archivo
 
     public static void saveMessagesToXml(Message message) {
@@ -14,7 +12,6 @@ public class MessageXmlManager {
             JAXBContext context = JAXBContext.newInstance(Message.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
             marshaller.marshal(message, new File(XML_FILE_PATH));
         } catch (JAXBException e) {
             e.printStackTrace();
