@@ -9,6 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -16,6 +19,8 @@ import javafx.scene.control.SelectionMode;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -39,6 +44,9 @@ public class HomePageController {
 
     @FXML
     private ListView<String> listView;
+
+    private String selectedRoom;
+
 
     @FXML
     private void initialize() {
@@ -69,22 +77,50 @@ public class HomePageController {
         }
     }
 
-    private void navigateToChatRoom() {
+ /*   private void navigateToChatRoom() {
         try {
             App.setRoot("ChatRoom");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
+ /*private void navigateToChatRoom() {
+     try {
+         ChatRoomController chatRoomController = (ChatRoomController);
+         App.setRoot("ChatRoom");
+         chatRoomController.setSelectedRoom(selectedRoom);
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+ }*/
+ private void navigateToChatRoom(String selectedRoom) {
+     try {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/trabajoacd/ChatRoom.fxml"));
+         Parent root = loader.load();
+
+         // Obtener el controlador de la nueva escena
+         ChatRoomController chatRoomController = loader.getController();
+
+         // Pasar el nombre de la sala
+         chatRoomController.initData(selectedRoom);
+
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) btn_room.getScene().getWindow();
+         stage.setScene(scene);
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+ }
 
     public void handleRoomSelection(javafx.event.ActionEvent event) {
         String selectedRoom = listView.getSelectionModel().getSelectedItem();
         if (selectedRoom != null) {
-            navigateToChatRoom();
+            navigateToChatRoom(selectedRoom); // Pasar el nombre de la sala seleccionada
         } else {
             System.out.println("Por favor, selecciona una sala antes de continuar.");
         }
     }
+
 
     @FXML
     void addChat(ActionEvent event) throws IOException {
@@ -108,9 +144,7 @@ public class HomePageController {
                 String roomName = roomElement.getTextContent();
                 listView.getItems().add(roomName);
             }
-
             listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

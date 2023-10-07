@@ -21,6 +21,12 @@ public class Message {
         this.timestamp = new Date();
     }
 
+    public Message(String senderNickname, String messageContent, Date timestamp) {
+        this.sender = senderNickname;
+        this.content = messageContent;
+        this.timestamp = new Date();
+    }
+
     @XmlElement
     public String getSender() {
         return sender;
@@ -53,13 +59,17 @@ public class Message {
         return messages;
     }
 
-    public void addMessage(String messageContent) {
-        messages.add(messageContent);
-    }
 
     @Override
     public String toString() {
         return timestamp + " " + sender + ": " + content;
     }
+
+
+    public void add(String roomName, String message) {
+        String formattedMessage = roomName + ": " + message;
+        messages.add(formattedMessage);
+    }
+
 }
 
