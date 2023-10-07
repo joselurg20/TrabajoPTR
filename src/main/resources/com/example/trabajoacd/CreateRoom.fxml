@@ -22,6 +22,6 @@
             <Image url="https://cdn.icon-icons.com/icons2/1369/PNG/512/-person-add_89833.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="423.0" prefHeight="17.0" prefWidth="800.0" textOverrun="CENTER_ELLIPSIS"  textFill="#09705d" />
+      <Label fx:id="labelTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="423.0" prefHeight="17.0" prefWidth="800.0" textFill="#09705d" textOverrun="CENTER_ELLIPSIS" />
    </children>
 </AnchorPane>
