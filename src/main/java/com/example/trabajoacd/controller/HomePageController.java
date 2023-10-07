@@ -77,7 +77,7 @@ public class HomePageController {
         }
     }
 
- /*   private void navigateToChatRoom() {
+    /*   private void navigateToChatRoom() {
         try {
             App.setRoot("ChatRoom");
         } catch (IOException e) {
