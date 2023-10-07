@@ -3,17 +3,14 @@ package com.example.trabajoacd.controller;
 import com.example.trabajoacd.App;
 import com.example.trabajoacd.model.domain.Session;
 import com.example.trabajoacd.model.domain.User;
-
 import com.example.trabajoacd.model.domain.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -25,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
-
     @FXML
     private TextField usernameField;
 
@@ -47,7 +43,6 @@ public class UserController {
             // Aquí puedes mostrar un mensaje de error al usuario si lo deseas.
         }
     }
-
 
     private boolean userExistsInXML(String nickname) {
         try {
@@ -82,7 +77,6 @@ public class UserController {
             return false; // Error al leer el archivo XML.
         }
     }
-
 
     private List<User> loadUsersFromXML() {
         List<User> userList = new ArrayList<>();
