@@ -2,23 +2,41 @@ package com.example.trabajoacd.model.DAO;
 
 import com.example.trabajoacd.controller.MessageXmlManager;
 import com.example.trabajoacd.model.domain.Message;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ChatsDAO {
 
-    public void saveMessage(String messageContent) {
+    public void saveMessageForRoom(String roomName, String message) {
+        // Cargar mensajes desde el XML
         Message chatRoom = MessageXmlManager.loadMessagesFromXml();
-        chatRoom.addMessage(messageContent);
+
+        // Agregar el nuevo mensaje
+        chatRoom.add(roomName, message);
+
+        // Guardar los mensajes actualizados
         MessageXmlManager.saveMessagesToXml(chatRoom);
     }
 
-    public String loadMessagesAsString() {
-        Message chatRoom = MessageXmlManager.loadMessagesFromXml();
-        List<String> messageList = chatRoom.getMessages();
-        StringBuilder messages = new StringBuilder();
-        for (String message : messageList) {
-            messages.append(message).append("\n");
+    public List<String> loadMessagesAsString() {
+        List<String> messages = new ArrayList<>();
+        Message message = MessageXmlManager.loadMessagesFromXml();
+        for (String msg : message.getMessages()) {
+            messages.add(msg);
         }
-        return messages.toString();
+        return messages;
     }
 }
+
+
+
+
+
+
+
+
+
+
+

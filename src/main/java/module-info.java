@@ -5,8 +5,7 @@ module com.example.trabajoacd {
     requires java.desktop;
 
     opens com.example.trabajoacd.model.domain to java.xml.bind;
-
-
+    exports com.example.trabajoacd.model.domain;
     opens com.example.trabajoacd to javafx.fxml;
     exports com.example.trabajoacd;
     exports com.example.trabajoacd.controller;
