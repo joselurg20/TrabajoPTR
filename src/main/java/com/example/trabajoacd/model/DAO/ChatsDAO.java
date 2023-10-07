@@ -5,16 +5,17 @@ import com.example.trabajoacd.model.domain.Message;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class ChatsDAO {
 
-    public void saveMessageForRoom(String roomName, String message) {
+    public void saveMessageForRoom(String roomName, String sender, String message, Date timestamp) {
         // Cargar mensajes desde el XML
         Message chatRoom = MessageXmlManager.loadMessagesFromXml();
 
         // Agregar el nuevo mensaje
-        chatRoom.add(roomName, message);
+        chatRoom.add(roomName, sender, message, timestamp);
 
         // Guardar los mensajes actualizados
         MessageXmlManager.saveMessagesToXml(chatRoom);
