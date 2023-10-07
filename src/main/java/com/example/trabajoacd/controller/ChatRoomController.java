@@ -2,8 +2,10 @@ package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
 import com.example.trabajoacd.model.DAO.ChatsDAO;
-import com.example.trabajoacd.model.domain.Message;
 import com.example.trabajoacd.model.domain.Session;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -22,26 +26,24 @@ public class ChatRoomController {
     @FXML
     private TextField messageField;
     @FXML
-    private Button btn;
+    private Button back;
+
     private String selectedRoom;
 
     private final ChatsDAO dao = new ChatsDAO();
 
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
 
-    @FXML
-    void backToRoom(ActionEvent event) throws IOException {
-        App.setRoot("HomePage");
-    }
 
     public void initialize() {
-        // Cargar mensajes anteriores desde el XML
         updateChat();
 
         chatListView.setItems(chatMessages);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5000), e -> updateChat()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
-    // Método para establecer la sala seleccionada desde la página anterior
     public void setSelectedRoom(String room) {
         selectedRoom = room;
     }
@@ -62,11 +64,17 @@ public class ChatRoomController {
 
     private void sendMessage(String senderNickname, String messageContent, Date timestamp, String roomName) {
         try {
-            dao.saveMessageForRoom(roomName, timestamp + ":" + senderNickname + ": " + messageContent);
+            dao.saveMessageForRoom(roomName, senderNickname, messageContent, timestamp);
 
-            String formattedMessage = timestamp + ":" + senderNickname + ": " + messageContent;
-            chatMessages.add(formattedMessage);
+            String formattedMessage = roomName + ": " + timestamp + ": " + senderNickname + ": " + messageContent;
 
+            // Agregar cada parte del mensaje como un elemento separado
+            chatMessages.add(roomName);
+            chatMessages.add(timestamp.toString());
+            chatMessages.add(senderNickname);
+            chatMessages.add(messageContent);
+
+            // Limpia el campo de mensaje
             messageField.clear();
         } catch (Exception e) {
             System.err.println("Error al guardar el mensaje en el XML: " + e.getMessage());
@@ -77,16 +85,28 @@ public class ChatRoomController {
         String messagesAsString = String.valueOf(dao.loadMessagesAsString());
         String[] messageArray = messagesAsString.split("\n");
 
-        // Limpiamos la lista antes de actualizarla
         chatMessages.clear();
 
-        // Añadimos los mensajes a la lista
-        chatMessages.addAll(Arrays.asList(messageArray));
-    }
+        for (String message : messageArray) {
+            String[] parts = message.split(":");
+            if (parts.length >= 2) {
+                String roomName = parts[0].trim();
+                if (selectedRoom.equals(roomName)) {
+                    chatMessages.add(message);
+                }
+            }
+        }
 
+        if (!chatMessages.isEmpty()) {
+            chatListView.scrollTo(chatMessages.size() - 1);
+        }
+    }
 
     public void initData(String selectedRoom) {
         this.selectedRoom = selectedRoom;
-        // Haz lo que necesites con el nombre de la sala
+    }
+
+    public void backtoroom(ActionEvent event) throws IOException {
+        App.setRoot("HomePage");
     }
 }

@@ -11,6 +11,10 @@ public class Message {
     private String sender;
     private Date timestamp;
     private String content;
+
+    private String roomName;
+
+
     private List<String> messages = new ArrayList<>(); // Lista de mensajes
 
     public Message() {}
@@ -59,6 +63,15 @@ public class Message {
         return messages;
     }
 
+    @XmlElement
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
 
     @Override
     public String toString() {
@@ -66,10 +79,11 @@ public class Message {
     }
 
 
-    public void add(String roomName, String message) {
-        String formattedMessage = roomName + ": " + message;
+    public void add(String roomName, String sender, String message, Date timestamp) {
+        String formattedMessage = roomName + ": " + timestamp + ":" + sender + ": " + message;
         messages.add(formattedMessage);
     }
+
 
 }
 
