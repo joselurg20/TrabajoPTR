@@ -48,6 +48,10 @@ public class HomePageController {
 
     private String selectedRoom;
 
+
+    public void setConnectedUsersComboBox(ComboBox<String> comboBox) {
+        this.connectedUsersComboBox = comboBox;
+    }
     @FXML
     private void initialize() {
         String chatRoomFilePath = "chatRoom.xml";
@@ -77,7 +81,6 @@ public class HomePageController {
         List<User> userList = loadedUsers.getUsers();
         UserManager.setConnectedUsers(userList);
     }
-
 
     private void cargarSalasDesdeXml(String filePath) {
         try {
@@ -136,21 +139,18 @@ public class HomePageController {
             // Desconectar al usuario
             UserManager.removeUser(user);
 
-            // Actualizar el ComboBox
-            Platform.runLater(() -> {
-                connectedUsersComboBox.getItems().clear();
-                connectedUsersComboBox.getItems().add("");
-
-                List<String> connectedUsers = Arrays.asList(UserManager.getConnectedUsersNames().split(", "));
-                connectedUsersComboBox.getItems().addAll(connectedUsers);
-            });
-
             // Eliminar al usuario del archivo XML
             XmlManager.removeUserFromXml(String.valueOf(user));
         }
 
+        // Actualizar la lista de usuarios conectados
+        Users loadedUsers = XmlManager.loadConnectedUsersFromXml();
+        List<User> userList = loadedUsers.getUsers();
+        UserManager.setConnectedUsers(userList);
+
         App.setRoot("User");
     }
+
 
 }
 

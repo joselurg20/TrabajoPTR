@@ -82,7 +82,7 @@ public class ChatRoomController {
 
             String formattedMessage = roomName + ": " + timestamp + ": " + senderNickname + ": " + messageContent;
 
-            chatMessages.add(formattedMessage);
+          /*  chatMessages.add(formattedMessage);*/
             chatMessagesSet.add(formattedMessage);
 
             return true;

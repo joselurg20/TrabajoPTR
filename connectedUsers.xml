@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <users>
-
-
+    <users>
+        <nickname>Alice</nickname>
+    </users>
+    <users>
+        <nickname>Alice</nickname>
+    </users>
+    <users>
+        <nickname>Alice</nickname>
+    </users>
+    <users>
+        <nickname>Alice</nickname>
+    </users>
+    <users>
+        <nickname>Bob</nickname>
+    </users>
+    <users>
+        <nickname>Eve</nickname>
+    </users>
+    <users>
+        <nickname>Bob</nickname>
+    </users>
 </users>
