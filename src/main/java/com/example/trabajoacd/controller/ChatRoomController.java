@@ -14,17 +14,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
-
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ChatRoomController {
+
     @FXML
     private ListView<String> chatListView;
 
     @FXML
     private TextField messageField;
+
     @FXML
     private Button back;
 
@@ -32,20 +35,31 @@ public class ChatRoomController {
 
     private final ChatsDAO dao = new ChatsDAO();
 
+    private final Set<String> chatMessagesSet = new HashSet<>();
+
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
 
+    private int lastMessageIndex = -1;
 
     public void initialize() {
-        updateChat();
-
         chatListView.setItems(chatMessages);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5000), e -> updateChat()));
+        chatMessagesSet.addAll(chatMessages);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> updateChat()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
 
+    public void initData(String selectedRoom) {
+        this.selectedRoom = selectedRoom;
+        chatMessages.clear();
+        updateChat();
+        List<String> messages = dao.loadMessagesForRoom(selectedRoom);
+        chatMessages.addAll(messages);
+    }
+
     public void setSelectedRoom(String room) {
         selectedRoom = room;
+        updateChat();
     }
 
     @FXML
@@ -56,54 +70,45 @@ public class ChatRoomController {
             String senderNickname = Session.currentUser.getNickname();
             Date timestamp = new Date();
 
-            sendMessage(senderNickname, messageContent, timestamp, selectedRoom);
-
-            messageField.clear();
+            if (sendMessage(senderNickname, messageContent, timestamp, selectedRoom)) {
+                messageField.clear();
+            }
         }
     }
 
-    private void sendMessage(String senderNickname, String messageContent, Date timestamp, String roomName) {
+    private boolean sendMessage(String senderNickname, String messageContent, Date timestamp, String roomName) {
         try {
             dao.saveMessageForRoom(roomName, senderNickname, messageContent, timestamp);
 
             String formattedMessage = roomName + ": " + timestamp + ": " + senderNickname + ": " + messageContent;
 
-            // Agregar cada parte del mensaje como un elemento separado
-            chatMessages.add(roomName);
-            chatMessages.add(timestamp.toString());
-            chatMessages.add(senderNickname);
-            chatMessages.add(messageContent);
+            chatMessages.add(formattedMessage);
+            chatMessagesSet.add(formattedMessage);
 
-            // Limpia el campo de mensaje
-            messageField.clear();
+            return true;
         } catch (Exception e) {
             System.err.println("Error al guardar el mensaje en el XML: " + e.getMessage());
+            return false;
         }
     }
 
+
     public void updateChat() {
-        String messagesAsString = String.valueOf(dao.loadMessagesAsString());
-        String[] messageArray = messagesAsString.split("\n");
+        if (selectedRoom == null) return;
 
-        chatMessages.clear();
+        List<String> messages = dao.loadMessagesForRoom(selectedRoom);
 
-        for (String message : messageArray) {
-            String[] parts = message.split(":");
-            if (parts.length >= 2) {
-                String roomName = parts[0].trim();
-                if (selectedRoom.equals(roomName)) {
-                    chatMessages.add(message);
-                }
-            }
+        for (int i = lastMessageIndex + 1; i < messages.size(); i++) {
+            String message = messages.get(i);
+            chatMessages.add(message);
+            chatMessagesSet.add(message);
         }
+
+        lastMessageIndex = messages.size() - 1;
 
         if (!chatMessages.isEmpty()) {
             chatListView.scrollTo(chatMessages.size() - 1);
         }
-    }
-
-    public void initData(String selectedRoom) {
-        this.selectedRoom = selectedRoom;
     }
 
     public void backtoroom(ActionEvent event) throws IOException {
