@@ -1,4 +1,4 @@
-package com.example.trabajoacd.controller;
+package com.example.trabajoacd.conexion;
 
 import com.example.trabajoacd.model.domain.Message;
 import javax.xml.bind.*;

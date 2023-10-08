@@ -1,11 +1,10 @@
 package com.example.trabajoacd.controller;
 
 import com.example.trabajoacd.App;
+import com.example.trabajoacd.conexion.XmlManager;
 import com.example.trabajoacd.model.domain.User;
 import com.example.trabajoacd.model.domain.Users;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,6 +1,6 @@
 package com.example.trabajoacd.model.DAO;
 
-import com.example.trabajoacd.controller.MessageXmlManager;
+import com.example.trabajoacd.conexion.MessageXmlManager;
 import com.example.trabajoacd.model.domain.Message;
 import java.util.ArrayList;
 import java.util.Date;

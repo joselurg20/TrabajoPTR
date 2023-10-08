@@ -1,4 +1,4 @@
-package com.example.trabajoacd.controller;
+package com.example.trabajoacd.conexion;
 
 import com.example.trabajoacd.model.domain.User;
 import com.example.trabajoacd.model.domain.Users;

@@ -10,4 +10,6 @@ module com.example.trabajoacd {
     exports com.example.trabajoacd;
     exports com.example.trabajoacd.controller;
     opens com.example.trabajoacd.controller to java.xml.bind, javafx.fxml;
+    exports com.example.trabajoacd.conexion;
+    opens com.example.trabajoacd.conexion to java.xml.bind, javafx.fxml;
 }
