@@ -57,9 +57,6 @@ public class HomePageController {
         connectedUsersComboBox.setStyle("-fx-pref-width: 150; -fx-pref-height: 50;");
         connectedUsersComboBox.setMinHeight(ComboBox.USE_PREF_SIZE);
 
-        // Agrega un espacio en blanco para comenzar
-        connectedUsersComboBox.getItems().add("");
-
         // Programa una tarea para actualizar el ComboBox cada 5 segundos
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
@@ -133,28 +130,25 @@ public class HomePageController {
 
     @FXML
     void login(ActionEvent event) throws IOException {
-        // Código para obtener el usuario actual, por ejemplo:
-        User user = getCurrentUser(); // Reemplaza esto con el código real para obtener el usuario
+        User user = getCurrentUser();
 
-        // Verificar si el usuario existe y está conectado antes de intentar desconectarlo
         if (user != null && UserManager.getConnectedUsers().contains(user)) {
             // Desconectar al usuario
             UserManager.removeUser(user);
-            // También es posible que desees actualizar el ComboBox aquí
+
+            // Actualizar el ComboBox
             Platform.runLater(() -> {
-                // Borra y vuelve a agregar la lista de usuarios
                 connectedUsersComboBox.getItems().clear();
-                connectedUsersComboBox.getItems().add(""); // Agrega un espacio en blanco
+                connectedUsersComboBox.getItems().add("");
 
-                // Obtén la lista de nombres de usuarios y divídela
                 List<String> connectedUsers = Arrays.asList(UserManager.getConnectedUsersNames().split(", "));
-
-                // Agrega los nombres de usuarios uno debajo del otro
                 connectedUsersComboBox.getItems().addAll(connectedUsers);
             });
+
+            // Eliminar al usuario del archivo XML
+            XmlManager.removeUserFromXml(String.valueOf(user));
         }
 
-        // Luego, continuar con el proceso de inicio de sesión
         App.setRoot("User");
     }
 

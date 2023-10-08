@@ -6,6 +6,7 @@ import com.example.trabajoacd.model.domain.User;
 import com.example.trabajoacd.model.domain.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.w3c.dom.Document;
@@ -36,11 +37,15 @@ public class UserController {
             Session.currentUser = new User(nickname);
             UserManager.addUser(Session.currentUser);
 
-            System.out.println("Bienvenido, " + nickname + "!");
+            System.out.println("Welcome, " + nickname + "!");
             App.setRoot("HomePage");
         } else {
-            System.out.println("El usuario con el nickname '" + nickname + "' no existe en el XML.");
-            // Aquí puedes mostrar un mensaje de error al usuario si lo deseas.
+            // Show an error message if the user does not exist
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("User Not Found");
+            alert.setHeaderText(null);
+            alert.setContentText("The user with the nickname '" + nickname + "' does not exist ");
+            alert.showAndWait();
         }
     }
 

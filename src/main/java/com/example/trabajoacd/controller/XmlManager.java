@@ -1,10 +1,12 @@
 package com.example.trabajoacd.controller;
 
+import com.example.trabajoacd.model.domain.User;
 import com.example.trabajoacd.model.domain.Users;
 
 import javax.xml.bind.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class XmlManager {
 
@@ -55,4 +57,34 @@ public class XmlManager {
             return new Users();
         }
     }
+
+    public static void removeUserFromXml(String username) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(Users.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            File file = new File(XML_FILE_PATH);
+
+            Users existingUsers = new Users();
+            if (file.exists()) {
+                existingUsers = (Users) unmarshaller.unmarshal(file);
+            }
+
+            List<User> users = existingUsers.getUsers();
+            for (User user : users) {
+                if (user.getNickname().equals(username)) {
+                    users.remove(user);
+                    break;
+                }
+            }
+
+            // Guardar la lista actualizada en el archivo XML
+            marshaller.marshal(existingUsers, file);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

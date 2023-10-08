@@ -14,7 +14,6 @@ public class Message {
 
     private String roomName;
 
-
     private List<String> messages = new ArrayList<>(); // Lista de mensajes
 
     public Message() {}

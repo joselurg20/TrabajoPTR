@@ -2,9 +2,7 @@ package com.example.trabajoacd.model.DAO;
 
 import com.example.trabajoacd.controller.MessageXmlManager;
 import com.example.trabajoacd.model.domain.Message;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -21,12 +19,20 @@ public class ChatsDAO {
         MessageXmlManager.saveMessagesToXml(chatRoom);
     }
 
-    public List<String> loadMessagesAsString() {
+    public List<String> loadMessagesForRoom(String roomName) {
         List<String> messages = new ArrayList<>();
         Message message = MessageXmlManager.loadMessagesFromXml();
+
         for (String msg : message.getMessages()) {
-            messages.add(msg);
+            String[] parts = msg.split(":");
+            if (parts.length >= 1) {
+                String currentRoom = parts[0].trim();
+                if (roomName.equals(currentRoom)) {
+                    messages.add(msg);
+                }
+            }
         }
+
         return messages;
     }
 }
